@@ -1,5 +1,6 @@
 import { async } from "@firebase/util";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../../contexts/user.context";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -33,6 +34,7 @@ const SignInForm = () => {
         email,
         password
       );
+
       resetFormFields();
     } catch (error) {
       switch (error.code) {
@@ -56,7 +58,6 @@ const SignInForm = () => {
 
   const logGooglePopupUser = async () => {
     const { user } = await signInWithGooglePopup();
-    const userDocRef = await createUserDocumentFromAuth(user);
   };
 
   return (
